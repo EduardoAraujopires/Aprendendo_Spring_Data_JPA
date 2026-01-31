@@ -1,0 +1,20 @@
+
+#criando o conector dos container(network)
+comando: docker network create library-network
+
+#Criando o banco de dados postgres e realizando a conexação do conteiner
+ comando: docker run --name library -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=library --network library-network postgres:18.1
+
+#Criando o PGADMIN e a conexacão(network)
+comando: docker run --name pgadmin4 -p 15432:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin --network library-network pgadmin4:9.10.0
+
+#Para encerrar o container
+comando: docker stop pgadmin4
+comando: docker stop library
+
+#Para excluir o container
+comando: docker container rm pgadmin
+comando: docker container rm library
+
+#Comando para descubrir se a porta está disponivel
+comando: netstat -aof | findstr 5432 
