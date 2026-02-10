@@ -10,23 +10,23 @@ import java.util.UUID;
 @Entity
 @Table(name = "autor")
 @Data
-@AllArgsConstructor
 public class Autor {
 
     @Id
-    @Column(name = "id", nullable = false )
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "nome", length = 100, nullable = false)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "data_nascimento", nullable = false)
+    @Column(name = "data_publicacao", nullable = false )
     private LocalDate dataPublicacao;
 
     @Column(name = "nacionalidade", nullable = false, length = 50)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor")
+   // @OneToMany(mappedBy = "autor")
+    @Transient
     private List<Livro> livros;
 }
