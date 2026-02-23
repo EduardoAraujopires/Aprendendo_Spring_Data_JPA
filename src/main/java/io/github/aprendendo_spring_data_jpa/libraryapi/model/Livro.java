@@ -11,7 +11,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "livro")
 @Data
-@AllArgsConstructor
 public class Livro {
 
     @Id
@@ -35,7 +34,9 @@ public class Livro {
     @Column(name = "genero", nullable = false, length = 30)
     private GeneroLivro genero;
 
-    @ManyToOne
+    @ManyToOne( fetch = FetchType.LAZY
+          //  cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "id_autor")
     private Autor autor;
 }
