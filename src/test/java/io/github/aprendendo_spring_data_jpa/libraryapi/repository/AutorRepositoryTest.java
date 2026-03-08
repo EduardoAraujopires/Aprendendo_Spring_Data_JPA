@@ -6,6 +6,7 @@ import io.github.aprendendo_spring_data_jpa.libraryapi.model.Livro;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,14 +26,13 @@ public class AutorRepositoryTest {
 
     @Test
     public void salvarTest() {
-
         Autor autor = new Autor();
-        autor.setNome("Eduardo");
-        autor.setNacionalidade("Brasileiro");
-        autor.setDataPublicacao(LocalDate.of(2008, 3, 16));
+        autor.setNome("Gustavo");
+        autor.setNacionalidade("brasileiro");
+        autor.setDataNacimento(LocalDate.of(2008, 3,16));
+        Autor autorNovo = repository.save(autor);
+        System.out.println("Novo Autor: " + autorNovo);
 
-        var autorNovo = repository.save(autor);
-        System.out.println("Autor Novo: " + autorNovo);
     }
 
     @Test
@@ -72,34 +72,34 @@ public class AutorRepositoryTest {
         repository.delete(neuma);
     }
 
-    @Test
+   @Test
     void salvarAutorTest(){
         Autor autor = new Autor();
-        autor.setNome("Paulo");
+        autor.setNome("Cloves");
         autor.setNacionalidade("Brasileira");
-        autor.setDataPublicacao(LocalDate.of(1972, 9, 20));
+        autor.setDataNacimento(LocalDate.of(1968, 11, 26));
 
         Livro livro = new Livro();
-        livro.setTitulo("Revolução");
-        livro.setIsbn("178412-2222");
-        livro.setGenero(GeneroLivro.MISTERIO);
-        livro.setPreco(BigDecimal.valueOf(600));
-        livro.setDataPublicacao(LocalDate.of(2088, 3, 16));
+        livro.setTitulo("Eu Vou Conseguir");
+        livro.setIsbn("1542-2215");
+        livro.setGenero(GeneroLivro.BIOGRAFIA);
+        livro.setPreco(BigDecimal.valueOf(170));
+        livro.setDataPublicacao(LocalDate.of(2021, 3,5));
         livro.setAutor(autor);
-
-        Livro livro2 = new Livro();
-        livro2.setTitulo("Mente de milhoes");
-        livro2.setIsbn("877-2222");
-        livro2.setGenero(GeneroLivro.MISTERIO);
-        livro2.setPreco(BigDecimal.valueOf(300));
-        livro2.setDataPublicacao(LocalDate.of(2005, 6, 21));
-        livro2.setAutor(autor);
 
         autor.setLivros(new ArrayList<>());
         autor.getLivros().add(livro);
-        autor.getLivros().add(livro2);
+
         repository.save(autor);
+        livroRepository.saveAll(autor.getLivros());
+    }
 
-
+    @Test
+    void listarLivroTest(){
+       UUID id = UUID.fromString("429fc161-35f2-4735-8230-07b8d1526ccf");
+       Autor autor = repository.findById(id).get();
+        List<Livro> listaLivros = livroRepository.findByAutor(autor);
+        autor.setLivros(listaLivros);
+        autor.getLivros().forEach(System.out::println);
     }
 }
