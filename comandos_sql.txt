@@ -6,6 +6,9 @@ create Table autor(
   nome varchar (100) not null,
   data_nascimento date not null,
   nacionalidade varchar (50) not null
+  data_cadastro timestamp,
+  data_atualizacao timestamp,
+  id_usuario uuid
 );
 
 #Tabela livro
@@ -15,6 +18,9 @@ create Table livro(
   titulo varchar(150) not null,
   data_publicacao date not null,
   preco numeric(18,2),
+  data_cadastro timestamp,
+  data_atualizacao timestamp,
+  id_usuario uuid
   genero varchar(30) not null,
   CONSTRAINT chk_genero CHECK(genero in ('ROMANCE', 'FICCAO', 'MISTERIO', 'BIOGRAFIA', 'CIENCIA')),
   id_autor uuid not null REFERENCES autor(id)
