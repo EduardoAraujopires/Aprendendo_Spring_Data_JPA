@@ -17,4 +17,5 @@ comando: docker container rm pgadmin
 comando: docker container rm library
 
 #Comando para descubrir se a porta está disponivel
-comando: netstat -aof | findstr 5432 
+comando: netstat -aof | findstr 5432
+docker run --name plataformaEnsino -p 5432:5432 -e POSTGRES_USERNAME=postgres -POSTGRES_PASSWORD=postgres -e POSTGRES_DB=plataformaEnsino --
