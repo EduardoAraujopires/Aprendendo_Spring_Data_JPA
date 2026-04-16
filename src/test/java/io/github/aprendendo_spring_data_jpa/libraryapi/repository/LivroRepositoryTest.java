@@ -30,13 +30,11 @@ class LivroRepositoryTest {
        livro.setGenero(GeneroLivro.CIENCIA);
        livro.setPreco(BigDecimal.valueOf(170));
        livro.setDataPublicacao(LocalDate.of(2019, 10, 2));
-        UUID idAutor = UUID.fromString("fd6b2298-1311-4b41-945f-ca52e14b6f6b");
+        UUID idAutor = UUID.fromString("84e49399-8dae-4502-9e3c-ca2e75561888");
         Autor autor = autorRepository.findById(idAutor).orElse(null);
         livro.setAutor(autor);
         Livro livroAtualizado = livroRepository.save(livro);
         System.out.println("Livro registrado: " + livroAtualizado);
-
-
 
     }
 
@@ -52,7 +50,7 @@ class LivroRepositoryTest {
         Autor autor = new Autor();
         autor.setNome("João");
         autor.setNacionalidade("Brasileiro");
-        autor.setDataNacimento(LocalDate.of(2008, 3, 16));
+        autor.setDataNascimento(LocalDate.of(2008, 3, 16));
         livro.setAutor(autor);
         livroRepository.save(livro);
     }
@@ -69,7 +67,7 @@ class LivroRepositoryTest {
         Autor autor = new Autor();
         autor.setNome("Neuma");
         autor.setNacionalidade("Brasileiro");
-        autor.setDataNacimento(LocalDate.of(2008, 3, 16));
+        autor.setDataNascimento(LocalDate.of(2008, 3, 16));
         autorRepository.save(autor);
 
         livro.setAutor(autor);

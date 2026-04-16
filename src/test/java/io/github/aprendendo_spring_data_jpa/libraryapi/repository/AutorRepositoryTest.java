@@ -29,7 +29,7 @@ public class AutorRepositoryTest {
         Autor autor = new Autor();
         autor.setNome("Gustavo");
         autor.setNacionalidade("brasileiro");
-        autor.setDataNacimento(LocalDate.of(2008, 3,16));
+        autor.setDataNascimento(LocalDate.of(2008, 3,16));
         Autor autorNovo = repository.save(autor);
         System.out.println("Novo Autor: " + autorNovo);
 
@@ -77,7 +77,7 @@ public class AutorRepositoryTest {
         Autor autor = new Autor();
         autor.setNome("Cloves");
         autor.setNacionalidade("Brasileira");
-        autor.setDataNacimento(LocalDate.of(1968, 11, 26));
+        autor.setDataNascimento(LocalDate.of(1968, 11, 26));
 
         Livro livro = new Livro();
         livro.setTitulo("Eu Vou Conseguir");
@@ -96,7 +96,7 @@ public class AutorRepositoryTest {
 
     @Test
     void listarLivroTest(){
-       UUID id = UUID.fromString("429fc161-35f2-4735-8230-07b8d1526ccf");
+       UUID id = UUID.fromString("84e49399-8dae-4502-9e3c-ca2e75561888");
        Autor autor = repository.findById(id).get();
         List<Livro> listaLivros = livroRepository.findByAutor(autor);
         autor.setLivros(listaLivros);
